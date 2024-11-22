@@ -53,7 +53,7 @@ function App() {
 export default App;
 
 const Heading = styled.h1`
-  font-family: "Kirang Haerang", "Barriecito", system-ui;
+  font-family: "Kirang Haerang", system-ui;
   font-size: 100px;
   margin: 20px 0;
   text-align: center;
@@ -63,7 +63,7 @@ const Heading = styled.h1`
 const Instructions = styled.p`
   margin: 10px auto;
   width: 50vw;
-  font-family: "Kirang Haerang", "Barriecito", system-ui;
+  font-family: "Kirang Haerang", system-ui;
   font-size: 30px;
   text-align: center;
   color: whitesmoke;
@@ -91,7 +91,7 @@ const GridItem = styled.button`
 `;
 
 const Button = styled.button`
-  font-family: "Kirang Haerang", "Barriecito", system-ui;
+  font-family: "Kirang Haerang", system-ui;
   display: block;
   background-color: smokewhite;
   border: black solid 2px;
