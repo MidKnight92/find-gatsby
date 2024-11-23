@@ -1,11 +1,12 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useState, useRef } from "react";
+import styled, { css, keyframes } from "styled-components";
 import Cell from "./Cell";
 import { getRandomColor } from "./constant";
 
 function App() {
   const [randomNumbers, setRandomNumbers] = useState<number[]>([]);
-  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   const getRandomNumbers = () => {
     const nums: number[] = [];
@@ -18,32 +19,42 @@ function App() {
     return nums;
   };
 
-  const gameState = () => {
+  const toggleGameState = () => {
     setIsGameStarted(!isGameStarted);
     setRandomNumbers(isGameStarted ? [] : getRandomNumbers());
   };
 
   return (
     <>
-      <Heading>
-        Find Gatsby
-      </Heading>
+      <Heading>Find Gatsby</Heading>
       <Instructions>
-        My dog is an adventerous guy and it's hard to keep up with him. Help me
-        find him by clicking the cards to see where he might be now.
+        Hi There! My dog Gatsby is an adventerous little guy, and it's hard to
+        keep up with him. Today, he's been exploring all over, and I need your
+        help to figure out where he's been! Click the cards to uncover clues
+        about Gatsby's whereabouts. Find <strong>all three cards</strong> to
+        piece together what he's been doing throughout the day. Can you track
+        down my curious pup and discover his adventure?
+        <strong>
+          Ready to start the search? Click the start button and let's go!
+        </strong>
       </Instructions>
       <GridContainter>
         {Array.from({ length: 12 }).map((_, idx: number) => (
           <GridItem key={idx}>
             <Cell
               idx={idx}
+              btnRef={btnRef}
               randomNumbers={randomNumbers}
               isGameStarted={isGameStarted}
             />
           </GridItem>
         ))}
       </GridContainter>
-      <Button onClick={gameState}>
+      <Button
+        ref={btnRef}
+        onClick={toggleGameState}
+        $isGameStarted={isGameStarted}
+      >
         {isGameStarted ? "Restart Game" : "Start Game"}
       </Button>
     </>
@@ -53,20 +64,16 @@ function App() {
 export default App;
 
 const Heading = styled.h1`
-  font-family: "Kirang Haerang", system-ui;
   font-size: 100px;
   margin: 20px 0;
   text-align: center;
-  color: whitesmoke;
 `;
 
 const Instructions = styled.p`
   margin: 10px auto;
   width: 50vw;
-  font-family: "Kirang Haerang", system-ui;
-  font-size: 30px;
+  font-size: 20px;
   text-align: center;
-  color: whitesmoke;
 `;
 
 const GridContainter = styled.div`
@@ -81,7 +88,6 @@ const GridItem = styled.button`
   border: whitesmoke solid 4px;
   margin: 20px;
   padding: 0;
-
   &:hover {
     border: ${() => getRandomColor} solid 4px;
   }
@@ -90,14 +96,28 @@ const GridItem = styled.button`
   }
 `;
 
-const Button = styled.button`
+const pulse = keyframes`
+  0% { opacity: .75; }
+  50% { opacity: .5; }
+  100% { opacity: 1; }
+`;
+
+const Button = styled.button<{
+  $isGameStarted: boolean;
+}>`
   font-family: "Kirang Haerang", system-ui;
   display: block;
   background-color: smokewhite;
   border: black solid 2px;
   margin: 20px auto;
   padding: 10px 20px;
+  cursor: pointer;
   font-weight: bold;
+  ${({ $isGameStarted }) =>
+    !$isGameStarted &&
+    css`
+      animation: ${pulse} 2s infinite ease-in-out;
+    `}
 
   &:hover {
     border: black solid 2px;

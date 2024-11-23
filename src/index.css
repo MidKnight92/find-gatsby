@@ -6,4 +6,6 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: rebeccapurple;
+  font-family: "Kirang Haerang", system-ui;
+  color: whitesmoke;
 }

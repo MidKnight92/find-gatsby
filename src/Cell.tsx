@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { CellProps, initialImage, imgs, notHereImage } from "./constant";
 
-
-const Cell: React.FC<CellProps> = ({ randomNumbers, idx, isGameStarted }): any => {
+const Cell: React.FC<CellProps> = ({
+  randomNumbers,
+  idx,
+  btnRef,
+  isGameStarted,
+}): any => {
   const [imgHref, setImgHref] = useState<string>(initialImage);
 
   useEffect(() => {
@@ -12,7 +16,10 @@ const Cell: React.FC<CellProps> = ({ randomNumbers, idx, isGameStarted }): any =
   }, [isGameStarted]);
 
   const handleClick = () => {
-    if (!isGameStarted) return;
+    if (!isGameStarted) {
+      btnRef.current?.focus();
+      return;
+    }
 
     const randomNumberIdx: number = randomNumbers.findIndex(
       (num: number) => num === idx
@@ -27,7 +34,7 @@ const Cell: React.FC<CellProps> = ({ randomNumbers, idx, isGameStarted }): any =
       src={imgHref}
       width="200px"
       style={{ display: "block" }}
-      alt="dog themed image"
+      alt="Dog themed image"
     />
   );
 };
