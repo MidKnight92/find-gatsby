@@ -10,19 +10,20 @@ export const imgs: string[] = [
 ];
 
 export interface CellProps {
-    btnRef: RefObject<HTMLButtonElement>,
-    randomNumbers: number[];
-    idx: number;
-    isGameStarted: boolean;
+  gatsbyImageCount: number;
+  setGatsbyImageCount: React.Dispatch<React.SetStateAction<number>>;
+  btnRef: RefObject<HTMLButtonElement>;
+  randomNumbers: number[];
+  idx: number;
+  isGameStarted: boolean;
 }
 
 export const getRandomColor = () => {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-  
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * letters.length)];
-    }
-    return color;
-  };
-  
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * letters.length)];
+  }
+  return color;
+};
