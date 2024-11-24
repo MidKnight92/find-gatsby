@@ -1,6 +1,21 @@
-import { useCallback, useEffect, useState } from "react";
-import { CellProps, initialImage, imgs, notHereImage } from "./constant";
+import { RefObject, useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
+import initialImage from "./assets/images/questionMark.png";
+import notHereImage from "./assets/images/notHere.png";
+import cityBoy from "./assets/images/cityBoy.png";
+import coolGuy from "./assets/images/coolGuy.png";
+import pizza from "./assets/images/pizza.png";
+
+export const imgs: string[] = [cityBoy, coolGuy, pizza];
+
+interface CellProps {
+  gatsbyImageCount: number;
+  setGatsbyImageCount: React.Dispatch<React.SetStateAction<number>>;
+  btnRef: RefObject<HTMLButtonElement>;
+  randomNumbers: number[];
+  idx: number;
+  isGameStarted: boolean;
+}
 
 const Cell: React.FC<CellProps> = ({
   gatsbyImageCount,

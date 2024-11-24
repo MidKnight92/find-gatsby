@@ -1,7 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import styled, { css, keyframes } from "styled-components";
 import Cell from "./Cell";
-import { getRandomColor } from "./constant";
 
 function App() {
   const [randomNumbers, setRandomNumbers] = useState<number[]>([]);
@@ -80,6 +79,16 @@ function App() {
 }
 
 export default App;
+
+const getRandomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * letters.length)];
+  }
+  return color;
+};
 
 const Footer = styled.footer`
   font-size: small;
