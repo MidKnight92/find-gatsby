@@ -1,12 +1,12 @@
 import { RefObject } from "react";
 
-export const initialImage: string = "../public/questionMark.png";
-export const notHereImage: string = "../public/notHere.png";
+export const initialImage: string = "./public/questionMark.png";
+export const notHereImage: string = "./public/notHere.png";
 
 export const imgs: string[] = [
-  "../public/cityBoy.png",
-  "../public/coolGuy.png",
-  "../public/pizza.png",
+  "./public/cityBoy.png",
+  "./public/coolGuy.png",
+  "./public/pizza.png",
 ];
 
 export interface CellProps {
