@@ -169,7 +169,7 @@ const Button = styled.button<{
   cursor: pointer;
   font-weight: bold;
   width: 80% @media (max-width: 768px) {
-    padding: 10px; /* Adjust padding for smaller screens */
+    padding: 10px;
   }
 
   ${({ $isGameStarted, $gatsbyImageCount }) =>
@@ -179,9 +179,9 @@ const Button = styled.button<{
     `}
 
   &:hover {
-    border: black solid 2px;
+    border: ${() => getRandomColor} solid 2px;
   }
   &:active {
-    border: black solid 2px;
+    border: ${() => getRandomColor} solid 2px;
   }
 `;

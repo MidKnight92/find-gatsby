@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useEffect, useState } from "react";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import initialImage from "./assets/images/questionMark.png";
 import notHereImage from "./assets/images/notHere.png";
@@ -26,11 +26,11 @@ const Cell: React.FC<CellProps> = ({
   isGameStarted,
 }): any => {
   const [imgHref, setImgHref] = useState<string>(initialImage);
-  const [isClicked, setIsClicked] = useState<boolean>(false);
+  const isClicked = useRef<boolean>(false);
 
   const resetImageState = () => {
     setImgHref(initialImage);
-    setIsClicked(false);
+    isClicked.current = false;
   };
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const Cell: React.FC<CellProps> = ({
       (num: number) => num === idx
     );
     setImgHref(randomNumberIdx !== -1 ? imgs[randomNumberIdx] : notHereImage);
-    setIsClicked(true);
+    isClicked.current = true;
     randomNumberIdx !== -1 && setGatsbyImageCount(gatsbyImageCount + 1);
   };
 
@@ -53,10 +53,10 @@ const Cell: React.FC<CellProps> = ({
       btnRef.current?.focus();
       return;
     }
-    if (gatsbyImageCount === 3 || isClicked) return;
+    if (gatsbyImageCount === 3 || isClicked.current) return;
 
     updateImageStateAndCount();
-  }, [isGameStarted, isClicked, gatsbyImageCount]);
+  }, [isGameStarted, gatsbyImageCount]);
 
   return (
     <Image onClick={handleClick} src={imgHref} alt="Dog themed image"></Image>
