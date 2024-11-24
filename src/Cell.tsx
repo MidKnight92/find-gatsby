@@ -5,9 +5,6 @@ import notHereImage from "./assets/images/notHere.png";
 import cityBoy from "./assets/images/cityBoy.png";
 import coolGuy from "./assets/images/coolGuy.png";
 import pizza from "./assets/images/pizza.png";
-
-export const imgs: string[] = [cityBoy, coolGuy, pizza];
-
 interface CellProps {
   gatsbyImageCount: number;
   setGatsbyImageCount: React.Dispatch<React.SetStateAction<number>>;
@@ -16,6 +13,8 @@ interface CellProps {
   idx: number;
   isGameStarted: boolean;
 }
+
+const imgs: string[] = [cityBoy, coolGuy, pizza];
 
 const Cell: React.FC<CellProps> = ({
   gatsbyImageCount,
