@@ -155,7 +155,6 @@ const pulse = keyframes`
   50% { opacity: .5; }
   100% { opacity: 1; }
 `;
-
 const Button = styled.button<{
   $isGameStarted: boolean;
   $gatsbyImageCount: number;

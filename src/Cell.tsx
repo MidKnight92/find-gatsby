@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useEffect, useRef, useState } from "react";
+import { RefObject, useCallback, useRef, useState } from "react";
 import styled from "styled-components";
 import initialImage from "./assets/images/questionMark.png";
 import notHereImage from "./assets/images/notHere.png";
@@ -25,6 +25,7 @@ const Cell: React.FC<CellProps> = ({
   isGameStarted,
 }): any => {
   const [imgHref, setImgHref] = useState<string>(initialImage);
+  const [previsGameStarted, setPrevIsGameStarted] = useState(isGameStarted);
   const isClicked = useRef<boolean>(false);
 
   const resetImageState = () => {
@@ -32,11 +33,11 @@ const Cell: React.FC<CellProps> = ({
     isClicked.current = false;
   };
 
-  useEffect(() => {
-    if (!isGameStarted) {
-      resetImageState();
-    }
-  }, [isGameStarted]);
+  // Avoid looping. Refer to you might not need effects in the react docs for reference.
+  if (isGameStarted !== previsGameStarted) {
+    setPrevIsGameStarted(isGameStarted);
+    resetImageState();
+  }
 
   const updateImageStateAndCount = () => {
     const randomNumberIdx: number = randomNumbers.findIndex(
