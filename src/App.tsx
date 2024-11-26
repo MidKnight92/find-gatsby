@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef } from "react";
 import styled, { css, keyframes } from "styled-components";
 import Cell from "./Cell";
 
@@ -8,7 +8,7 @@ function App() {
   const [gatsbyImageCount, setGatsbyImageCount] = useState<number>(0);
   const btnRef = useRef<HTMLButtonElement>(null);
 
-  const getRandomNumbers = () => {
+  const getRandomNumbers = (): number[] => {
     const nums: number[] = [];
     for (let i = 0; i < 3; i++) {
       const randomNumber = Math.floor(Math.random() * 12);
@@ -19,13 +19,13 @@ function App() {
     return nums;
   };
 
-  const toggleGameState = useCallback(() => {
+  const toggleGameState = (): void => {
     setIsGameStarted(!isGameStarted);
     setRandomNumbers(isGameStarted ? [] : getRandomNumbers());
     setGatsbyImageCount(0);
-  }, [isGameStarted]);
+  };
 
-  const instructions = (
+  const instructions: JSX.Element = (
     <>
       Hi There! My dog Gatsby is an adventerous little guy, and it's hard to
       keep up with him. Today, he's been exploring all over, and I need your
@@ -37,7 +37,7 @@ function App() {
     </>
   );
 
-  const thankYouMessage = (
+  const thankYouMessage: JSX.Element = (
     <>
       Wow! What a journey! Gatsby sure knows how to keep us on our toes. You're
       the best for helping me track him down! Thanks for playing -{" "}
@@ -80,7 +80,7 @@ function App() {
 
 export default App;
 
-const getRandomColor = () => {
+const getRandomColor = (): string => {
   const letters = "0123456789ABCDEF";
   let color = "#";
 
