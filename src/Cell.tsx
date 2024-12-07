@@ -6,6 +6,7 @@ import cityBoy from "./assets/images/cityBoy.png";
 import coolGuy from "./assets/images/coolGuy.png";
 import pizza from "./assets/images/pizza.png";
 interface CellProps {
+  gameCount: number;
   gatsbyImageCount: number;
   setGatsbyImageCount: React.Dispatch<React.SetStateAction<number>>;
   btnRef: RefObject<HTMLButtonElement>;
@@ -17,6 +18,7 @@ interface CellProps {
 const imgs: string[] = [cityBoy, coolGuy, pizza];
 
 const Cell: React.FC<CellProps> = ({
+  gameCount,
   gatsbyImageCount,
   setGatsbyImageCount,
   randomNumbers,
@@ -25,19 +27,7 @@ const Cell: React.FC<CellProps> = ({
   isGameStarted,
 }): any => {
   const [imgHref, setImgHref] = useState<string>(initialImage);
-  const [previsGameStarted, setPrevIsGameStarted] = useState(isGameStarted);
   const isClicked = useRef<boolean>(false);
-
-  const resetImageState = () => {
-    setImgHref(initialImage);
-    isClicked.current = false;
-  };
-
-  // Avoid looping. Refer to you might not need effects in the react docs for reference.
-  if (isGameStarted !== previsGameStarted) {
-    setPrevIsGameStarted(isGameStarted);
-    resetImageState();
-  }
 
   const updateImageStateAndCount = () => {
     const randomNumberIdx: number = randomNumbers.findIndex(
@@ -52,10 +42,11 @@ const Cell: React.FC<CellProps> = ({
     if (!isGameStarted) {
       btnRef.current?.focus();
       return;
+    } else if (gatsbyImageCount === 3 || isClicked.current) {
+      return;
+    } else {
+      updateImageStateAndCount();
     }
-    if (gatsbyImageCount === 3 || isClicked.current) return;
-
-    updateImageStateAndCount();
   }, [isGameStarted, gatsbyImageCount]);
 
   return (

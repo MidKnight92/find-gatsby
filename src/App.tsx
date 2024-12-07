@@ -3,6 +3,7 @@ import styled, { css, keyframes } from "styled-components";
 import Cell from "./Cell";
 
 function App() {
+  const [gameCount, setGameCount] = useState<number>(1);
   const [randomNumbers, setRandomNumbers] = useState<number[]>([]);
   const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
   const [gatsbyImageCount, setGatsbyImageCount] = useState<number>(0);
@@ -20,6 +21,7 @@ function App() {
   };
 
   const toggleGameState = (): void => {
+    setGameCount(gameCount + 1);
     setIsGameStarted(!isGameStarted);
     setRandomNumbers(isGameStarted ? [] : getRandomNumbers());
     setGatsbyImageCount(0);
@@ -53,12 +55,14 @@ function App() {
         {Array.from({ length: 12 }).map((_, idx: number) => (
           <GridItem key={idx}>
             <Cell
+              key={gameCount}
               gatsbyImageCount={gatsbyImageCount}
               setGatsbyImageCount={setGatsbyImageCount}
               idx={idx}
               btnRef={btnRef}
               randomNumbers={randomNumbers}
               isGameStarted={isGameStarted}
+              gameCount={gameCount}
             />
           </GridItem>
         ))}
