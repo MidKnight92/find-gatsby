@@ -35,7 +35,7 @@ const Cell: React.FC<CellProps> = ({
     );
     setImgHref(randomNumberIdx !== -1 ? imgs[randomNumberIdx] : notHereImage);
     isClicked.current = true;
-    randomNumberIdx !== -1 && setGatsbyImageCount(prevGatsbyImageCount => prevGatsbyImageCount + 1);
+    randomNumberIdx !== -1 && setGatsbyImageCount((prevGatsbyImageCount: number): number => prevGatsbyImageCount + 1);
   };
 
   const handleClick = useCallback(() => {

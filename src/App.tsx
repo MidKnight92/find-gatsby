@@ -21,8 +21,8 @@ function App() {
   };
 
   const toggleGameState = (): void => {
-    setGameCount(prevGameCount => prevGameCount + 1);
-    setIsGameStarted(prevIsGameStarted => !prevIsGameStarted);
+    setGameCount((prevGameCount: number): number => prevGameCount + 1);
+    setIsGameStarted((prevIsGameStarted: boolean): boolean => !prevIsGameStarted);
     setRandomNumbers(isGameStarted ? [] : getRandomNumbers());
     setGatsbyImageCount(0);
   };
